@@ -15,15 +15,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/categories', 'CategoryController@index')->name('categories');
 Route::get('/categories/{id}', 'CategoryController@detail')->name('categories-detail');
+
 Route::get('/details/{id}', 'DetailController@index')->name('detail');
 Route::post('/details/{id}', 'DetailController@add')->name('detail-add');
 
-Route::post('/checkout/callback', 'CheckoutController@callback')->name('midtrans-callback');
-
 Route::get('/success', 'CartController@success')->name('success');
-
+Route::post('/checkout/callback', 'CheckoutController@callback')->name('midtrans-callback');
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -61,6 +61,7 @@ Route::prefix('admin')
         Route::resource('user', 'UserController');
         Route::resource('product', 'ProductController');
         Route::resource('product-gallery', 'ProductGalleryController');
+        Route::resource('transaction', 'TransactionController');
     });
 
 Auth::routes();
